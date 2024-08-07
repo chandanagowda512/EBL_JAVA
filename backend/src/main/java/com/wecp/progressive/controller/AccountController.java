@@ -1,30 +1,30 @@
 package com.wecp.progressive.controller;
- 
- 
+
+
 import com.wecp.progressive.entity.Accounts;
 import com.wecp.progressive.service.AccountService;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
- 
+
 import java.sql.SQLException;
 import java.util.List;
- 
- 
+
+
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
- 
+
     private final AccountService accountService;
- 
+
     @Autowired
     public AccountController(@Qualifier("accountServiceImplJpa") AccountService accountService) {
         this.accountService = accountService;
     }
- 
+
     @GetMapping
     public ResponseEntity<List<Accounts>> getAllAccounts() {
         try {
@@ -34,7 +34,7 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
- 
+
     @GetMapping("/{accountId}")
     public ResponseEntity<Accounts> getAccountById(@PathVariable int accountId) {
         try {
@@ -57,7 +57,7 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
- 
+
     @PostMapping
     public ResponseEntity<Integer> addAccount(@RequestBody Accounts accounts) {
         try {
@@ -67,7 +67,7 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
- 
+
     @PutMapping("/{accountId}")
     public ResponseEntity<Void> updateAccount(@PathVariable int accountId, @RequestBody Accounts accounts) {
         try {
@@ -78,7 +78,7 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
- 
+
     @DeleteMapping("/{accountId}")
     public ResponseEntity<Void> deleteAccount(@PathVariable int accountId) {
         try {
@@ -89,4 +89,3 @@ public class AccountController {
         }
     }
 }
- 
